@@ -47,10 +47,6 @@ Notification.addHook('afterCreate', async (notification) => {
   if (socket) {
     notification = await Notification.findByPk(notification.id, {
       include: [Chore],
-      // include: [
-      //   { model: User, where: { id: 'toiD' } },
-      //   { model: User, where: { id: 'fromiD' }, as: 'from' },
-      // ],
     });
     socket.send(JSON.stringify({ type: 'SEND_NOTIFICATION', notification }));
   }

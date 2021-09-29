@@ -166,21 +166,6 @@ User.addHook('beforeSave', async (user) => {
   }
 });
 
-//Adds a Notification List to the user
-//Adds a Wish List to the user
-//Adds an Allowance to the user
-// User.addHook('afterCreate', async (user) => {
-//   const notificationList = await NotificationList.create();
-//   notificationList.userId = notificationList.id;
-//   await notificationList.save();
-//   const wishList = await WishList.create();
-//   wishList.userId = wishList.id;
-//   await wishList.save();
-//   const allowance = await Allowance.create();
-//   allowance.userId = user.id;
-//   await allowance.save();
-// });
-
 User.prototype.getNotifications = function () {
   return db.models.notification.findAll({
     where: {
@@ -190,25 +175,6 @@ User.prototype.getNotifications = function () {
     order: [['createdAt', 'DESC']],
   });
 };
-
-// User.addHook('afterUpdate', async (notification) => {
-//   const socket = socketUtils
-//     .getSockets()
-//     .find((socket) => notification.id === socket.userId);
-//   if (socket) {
-//     notification = await User.findByPk(notification.id);
-//     socket.send(JSON.stringify({ type: 'UPDATE_ALLOWANCE', notification }));
-//   }
-//   const parentsocket = socketUtils
-//     .getSockets()
-//     .find((socket) => socket.userId === 8);
-//   if (parentsocket) {
-//     notification = await User.findByPk(notification.id);
-//     parentsocket.send(
-//       JSON.stringify({ type: 'UPDATE_ALLOWANCE', notification })
-//     );
-//   }
-// });
 
 User.addHook('afterUpdate', async (notification) => {
   const socket = socketUtils.getSockets().filter((socket) => {

@@ -16,8 +16,6 @@ Chore.hasOne(Notification);
 
 User.hasMany(WishListItem);
 WishListItem.belongsTo(User);
-// WishListItem.belongsTo(WishList);
-// WishList.hasMany(WishListItem);
 
 User.hasOne(NotificationList);
 NotificationList.belongsTo(User);
@@ -27,12 +25,7 @@ Notification.belongsTo(User, { as: 'from' });
 Notification.belongsTo(User, { as: 'to' });
 User.hasMany(Notification);
 
-// Allowance.belongsTo(User);
-// User.hasOne(Allowance);
-
-// ChoreList.hasMany(Chore);
 Chore.belongsTo(ChoreList);
-// ChoreList.belongsTo(Family);
 Family.hasOne(ChoreList);
 Chore.belongsTo(User);
 User.hasMany(Chore);
@@ -41,16 +34,12 @@ Family.hasMany(Chore);
 
 Transaction.belongsTo(User);
 User.hasMany(Transaction);
-// Transaction.belongsTo(User);
-// TransactionHistory.hasMany(Transaction);
-// TransactionHistory.belongsTo(User);
 
 //export models and db
 module.exports = {
   db,
   models: {
     Transaction,
-    // TransactionHistory,
     ChoreList,
     Chore,
     Family,
