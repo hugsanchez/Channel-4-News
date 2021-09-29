@@ -16,7 +16,7 @@ const startAllowanceTasks = async () => {
     });
 
     const newAllowanceJob = new SimpleIntervalJob(
-      { seconds: user.allowanceInterval * 2 },
+      { seconds: user.allowanceInterval * 30 },
       addAllowance
     );
 
@@ -32,7 +32,7 @@ const startAllowanceTasks = async () => {
       }
     });
 
-    const intervalJob = new SimpleIntervalJob({ seconds: 2 }, addInterval);
+    const intervalJob = new SimpleIntervalJob({ seconds: 30 }, addInterval);
 
     intervalJob.id = user.email;
 

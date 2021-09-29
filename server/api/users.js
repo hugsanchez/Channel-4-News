@@ -169,7 +169,7 @@ router.put('/allowance/:id', async (req, res, next) => {
       }
     });
 
-    const intervalJob = new SimpleIntervalJob({ seconds: 2 }, addInterval);
+    const intervalJob = new SimpleIntervalJob({ seconds: 30 }, addInterval);
 
     intervalJob.id = name;
 

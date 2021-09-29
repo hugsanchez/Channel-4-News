@@ -12,7 +12,9 @@ const { Chore } = require('../db/models/Chore');
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.byToken(req.headers.authorization);
+    console.log(req.headers.authorization);
     res.send(await user.getNotifications());
+    console.log('made it this far');
   } catch (err) {
     next(err);
   }

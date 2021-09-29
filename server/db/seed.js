@@ -163,8 +163,8 @@ const syncAndSeed = async () => {
       cardColor: 'rgb(153, 97, 255)',
       cardImage: 'public/images/cardIcons/catpeak.png',
       allowance: 8,
-      daysToAllowance: 30,
-      allowanceInterval: 30,
+      daysToAllowance: 7,
+      allowanceInterval: 7,
       status: 'Child',
     });
 
@@ -183,8 +183,8 @@ const syncAndSeed = async () => {
       status: 'Child',
       cardColor: '#00d9ff',
       cardImage: 'public/images/cardIcons/basketball.png',
-      daysToAllowance: 30,
-      allowanceInterval: 30,
+      daysToAllowance: 7,
+      allowanceInterval: 7,
       allowance: 5,
     });
 
@@ -496,8 +496,7 @@ const syncAndSeed = async () => {
         itemName: 'Mongoose bike',
         description:
           'The Mongoose Excursion mountain bike was built for big adventures. It comes complete with a steel mountain bike frame and a front suspension fork that are perfect for rugged trail rides. The 21-speed twist shifters make it easy to adapt to your terrain, while the front disc brake and rear V-brake deliver crisp, controlled stops. Go out and conquer the trails with the Excursion by Mongoose.',
-        imgUrl:
-          'https://images.mountainbikeq.com/excursion-boys-mountain-bike-24-inch-wheel.jpg',
+        imgUrl: 'https://i.ebayimg.com/images/g/D6YAAOSw9gJf6c6T/s-l640.jpg',
         cost: 165.0,
         linkUrl:
           'https://www.walmart.com/ip/Mongoose-Excursion-Mountain-Bike-24-inch-wheel-21-speeds-black-yellow/567158280',

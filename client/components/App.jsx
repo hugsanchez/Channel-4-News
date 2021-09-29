@@ -89,7 +89,7 @@ class App extends Component {
     if (prevProps.currUser.status !== this.props.currUser.status) {
       this.forceUpdate();
     }
-    if (this.props.currUser) {
+    if (prevProps.currUser !== this.props.currUser) {
       this.props.setAllowance(
         this.props.currUser.balance,
         this.props.currUser.allowanceInterval
