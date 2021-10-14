@@ -1,7 +1,7 @@
 const router = require('express')();
 // const router = Router();
 const {
-  models: { User },
+  models: { User, Notification },
 } = require('../db/models/associations');
 const Family = require('../db/models/Family');
 const { Transaction } = require('../db/models/Transaction');
@@ -29,7 +29,6 @@ router.get('/:id', async (req, res, next) => {
       await User.findByPk(id, {
         include: [
           { model: Transaction },
-          // { model: Allowance },
           {
             model: Family,
             include: {

@@ -128,7 +128,7 @@ const ChoreCard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    parents: state.currUser.family.users.filter(
+    parents: state.currUser.family?.users.filter(
       (currUser) => currUser.status === 'Parent'
     ),
     user: state.currUser,
