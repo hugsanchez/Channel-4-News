@@ -59,7 +59,6 @@ class App extends Component {
   async componentDidMount() {
     await this.props.attemptLogin();
     await this.setState({ ...this.state, user: this.props.currUser });
-    console.log('mounted');
     websocket.addEventListener('message', (ev) => {
       const action = JSON.parse(ev.data);
       if (action.notification?.familyId) {
@@ -87,7 +86,6 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('updated');
     if (prevProps.currUser.status !== this.props.currUser.status) {
       this.forceUpdate();
     }
@@ -106,7 +104,6 @@ class App extends Component {
         this.props.loadNotifications();
       }
       if (websocket.readyState === 1) {
-        console.log('readyState');
         websocket.send(
           JSON.stringify({
             token: window.localStorage.getItem('userToken'),

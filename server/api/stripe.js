@@ -255,6 +255,7 @@ router.post('/invoiceitems/:id', async (req, res, next) => {
 //create invoice
 router.post('/invoice/:id/:user', async (req, res, next) => {
   try {
+    console.log('we are here');
     const add = new Task('invoice', async () => {
       const invoiceItems = await stripe.invoiceItems.list({
         customer: req.params.id,

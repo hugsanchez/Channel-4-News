@@ -15,13 +15,18 @@ const LinkPlaid = (props) => {
   const [auth, setAuth] = useState(true);
   const [processing, setProcessing] = useState(false);
 
-  async function fetchToken() {
-    let linkToken = (await axios.post('/api/plaid/create_link_token')).data;
+  async function fetchToken(user) {
+    console.log(props.user);
+    console.log('right one');
+    let { data: linkToken } = await axios.post(
+      '/api/plaid/create_link_token',
+      user
+    );
     setToken(linkToken);
   }
 
   if (!token) {
-    fetchToken();
+    fetchToken(props?.user);
   }
 
   const onSuccess = async (token, metadata) => {

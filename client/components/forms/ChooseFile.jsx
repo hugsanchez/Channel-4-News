@@ -73,6 +73,7 @@ const ChooseFile = ({
             <input {...getInputProps()} />
             {acceptedFiles.length ? onFileLoad(acceptedFiles) : ''}
             <p>Drag n drop some files here, or click to select files</p>
+            <input type="file"></input>
           </div>
         </section>
         <Avatar
