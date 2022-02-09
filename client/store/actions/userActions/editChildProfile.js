@@ -32,7 +32,6 @@ export const updateChildProfileThunk = (user) => {
           },
         }
       );
-
       const getUser = (await axios.get(`/api/users/${id}`)).data;
       dispatch(updateChild(getUser));
     } catch (err) {

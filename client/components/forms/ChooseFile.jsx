@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-//React Dropzone Imports
-import { useDropzone } from 'react-dropzone';
-
 //Redux Imports
 import { connect } from 'react-redux';
 
@@ -36,46 +33,50 @@ const ChooseFile = ({
   email,
   imgUrl,
 }) => {
-  //From React Dropzone
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    maxFilesize: 200,
-    maxThumbnailFilesize: 200,
-  });
+  const [newImgUrl, setNewImg] = useState(imgUrl);
 
-  const [newImgUrl, setNewImg] = useState('');
-
-  if (!acceptedFiles) {
-    return null;
-  }
-  const onFileLoad = (acceptedFiles) => {
-    let file = acceptedFiles[0];
+  const onFileLoad = (file) => {
     let fileReader = new FileReader();
-    fileReader.onload = () => {
-      setNewImg(fileReader.result);
-    };
-    fileReader.onabort = () => {
-      alert('Reading aborted');
-    };
-    fileReader.onerror = () => {
-      alert('Reading error');
-    };
+    if (file.size > 450000) {
+      alert('FILE TOO BIG!');
+    } else {
+      fileReader.onload = () => {
+        setNewImg(fileReader.result);
+      };
+      fileReader.onabort = () => {
+        alert('Reading aborted');
+      };
+      fileReader.onerror = () => {
+        alert('Reading error');
+      };
+    }
 
     fileReader.readAsDataURL(file);
+  };
+
+  const hiddenFileInput = React.useRef(null);
+
+  const handleClick = (evt) => {
+    hiddenFileInput.current.click();
   };
 
   const classes = useStyles();
   return (
     <div>
       <Dialog open={open} onClose={close} fullWidth>
-        <section className="choose-file-container">
-          <div {...getRootProps({ className: 'dropzone' })}>
-            <input {...getInputProps()} />
-            {acceptedFiles.length ? onFileLoad(acceptedFiles) : ''}
-            <p>Drag n drop some files here, or click to select files</p>
-            <input type="file"></input>
-          </div>
-        </section>
+        <div className="choose-file-container">
+          <span className="drop-zone__prompt" onClick={handleClick}>
+            Drag n drop some files here, or click to select files
+          </span>
+          <input
+            type="file"
+            onChange={(evt) => onFileLoad(evt.target.files[0])}
+            ref={hiddenFileInput}
+            name="myFile"
+            className="drop-zone__input"
+            accept="image/*"
+          />
+        </div>
         <Avatar
           className={classes.editAvatar}
           src={!newImgUrl ? imgUrl : newImgUrl}
