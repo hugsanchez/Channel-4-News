@@ -12,4 +12,9 @@
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
+  cursor: pointer;
+}
+
+.drop-zone__input {
+  display: none;
 }
