@@ -192,7 +192,7 @@ const syncAndSeed = async () => {
       imgUrl:
         'public/images/profilePics/daniil-kuzelev-AkGd_YB6Q2c-unsplash.jpg',
       username: 'Sonny',
-      email: 'mommy@test.com',
+      email: 'mom@test.com',
       password: 'password123',
       firstName: 'Sonny',
       lastName: 'Momordad',
@@ -204,7 +204,7 @@ const syncAndSeed = async () => {
 
     const parent2 = await User.create({
       username: 'Sandy',
-      email: 'daddy@test.com',
+      email: 'dad@test.com',
       password: 'password123',
       firstName: 'Sandy',
       lastName: 'Momordad',

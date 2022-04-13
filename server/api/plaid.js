@@ -11,12 +11,11 @@ const plaidClient = new plaid.Client({
 router.post('/create_link_token', async (req, res, next) => {
   try {
     const { id, firstName, lastName, email } = req?.body;
-    console.log(req.body, 'defined');
     const response = await plaidClient.createLinkToken({
       user: {
         client_user_id: `user${id}` || 'userId',
         legal_name: `${firstName} ${lastName}` || 'User Name',
-        email_address: `${email}` || 'email@test.com',
+        email_address: email,
       },
       client_name: 'FUNDIT',
       products: ['auth', 'transactions', 'identity'],

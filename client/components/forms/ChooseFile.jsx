@@ -8,6 +8,7 @@ import { Avatar, Button, Dialog, makeStyles } from '@material-ui/core';
 
 //Style Imports
 import '../../../public/style/chooseFile.css';
+import { updateImgThunk } from '../../store/actions/userActions/editImg';
 
 const useStyles = makeStyles((theme) => ({
   editAvatar: {
@@ -26,38 +27,40 @@ const useStyles = makeStyles((theme) => ({
 const ChooseFile = ({
   open,
   close,
-  submit,
-  firstName,
-  lastName,
-  username,
-  email,
+  currUser,
+  history,
+  updateImage,
   imgUrl,
 }) => {
   const [newImgUrl, setNewImg] = useState(imgUrl);
 
+  if (!currUser.id) {
+    return null;
+  }
+
   const onFileLoad = (file) => {
-    let fileReader = new FileReader();
     if (file.size > 450000) {
       alert('FILE TOO BIG!');
-    } else {
-      fileReader.onload = () => {
-        setNewImg(fileReader.result);
-      };
-      fileReader.onabort = () => {
-        alert('Reading aborted');
-      };
-      fileReader.onerror = () => {
-        alert('Reading error');
-      };
-    }
+    } else if (file) {
+      let fileReader = new FileReader();
 
-    fileReader.readAsDataURL(file);
+      fileReader.addEventListener('load', function () {
+        setNewImg(fileReader.result);
+      });
+      fileReader.readAsDataURL(file);
+    }
   };
 
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = (evt) => {
     hiddenFileInput.current.click();
+  };
+
+  const handleSubmit = async (imgUrl) => {
+    const { id } = currUser;
+    await updateImage({ id, imgUrl });
+    history.push('/home');
   };
 
   const classes = useStyles();
@@ -82,15 +85,16 @@ const ChooseFile = ({
           src={!newImgUrl ? imgUrl : newImgUrl}
         />
         <div className={classes.buttonChooseFile}>
-          <Button
-            variant="contained"
-            onClick={() =>
-              submit(firstName, lastName, username, email, newImgUrl)
-            }
-          >
+          <Button variant="contained" onClick={() => handleSubmit(newImgUrl)}>
             Save!
           </Button>
-          <Button variant="contained" onClick={close}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setNewImg(imgUrl);
+              close();
+            }}
+          >
             Close
           </Button>
         </div>
@@ -99,4 +103,16 @@ const ChooseFile = ({
   );
 };
 
-export default connect()(ChooseFile);
+const mapStateToProps = (state) => {
+  return {
+    currUser: state.currUser,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateImage: ({ id, imgUrl }) => dispatch(updateImgThunk({ id, imgUrl })),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChooseFile);

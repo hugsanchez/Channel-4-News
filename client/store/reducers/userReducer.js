@@ -5,6 +5,7 @@ import { UPDATE_CHILD_PROFILE } from '../actions/userActions/editChildProfile';
 import { UPDATE_CARD } from '../actions/cardActions/updateCard';
 import { UPDATE_ALLOWANCE } from '../actions/allowance/updateAllowance';
 import { PURCHASE_OR_WITHDRAW } from '../actions/wishListActions/purchaseOrWithdraw';
+import { UPDATE_IMAGE } from '../actions/userActions/editImg';
 
 const curUserReducer = (state = {}, action) => {
   if (action.type === GET_CURRENT_USER) {
@@ -15,6 +16,9 @@ const curUserReducer = (state = {}, action) => {
   }
   if (action.type === JOIN_FAMILY) {
     return (state = action.user);
+  }
+  if (action.type === UPDATE_IMAGE) {
+    return (state = action.updateImg);
   }
   if (action.type === UPDATE_CHILD_PROFILE) {
     state = action.updatedUser;

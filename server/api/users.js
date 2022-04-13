@@ -84,15 +84,19 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-// //upload image file
-// router.put('/image/:id', async (req, res, next) => {
-//   console.log(req.file);
-//   try {
-//     res.send({ file: req.file });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+//upload image file
+router.put('/image/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+
+    const { imgUrl } = req.body;
+
+    await user.update({ imgUrl });
+    res.status(200).send(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 //update user
 router.put('/:id', async (req, res, next) => {

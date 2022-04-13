@@ -237,6 +237,7 @@ const EditChildInfo = ({ currUser, updateUser, history, setAllowance }) => {
           username={editValues.username}
           email={editValues.email}
           imgUrl={newImgUrl}
+          history={history}
         />
       </Paper>
     </div>
