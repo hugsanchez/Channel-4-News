@@ -149,7 +149,7 @@ User.authenticate = async (creds) => {
 User.byToken = async (token) => {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    //get the user id and return user
+
     const user = await User.findByPk(id);
     if (user) return user;
   } catch (err) {

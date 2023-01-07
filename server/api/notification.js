@@ -8,7 +8,6 @@ const User = require('../db/models/User');
 const { Chore } = require('../db/models/Chore');
 
 //Get all notifications based on user token
-
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.byToken(req.headers.authorization);

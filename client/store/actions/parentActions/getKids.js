@@ -4,7 +4,13 @@ const GET_KIDS = 'GET_KIDS';
 
 const getKids = (id) => {
   return async (dispatch) => {
-    const user = (await axios.get(`/api/users/${id}`)).data;
+    const user = (
+      await axios.get(`/api/users/${id}`, {
+        headers: {
+          authorization: window.localStorage.getItem('userToken'),
+        },
+      })
+    ).data;
     const kids = user.family?.users.filter((user) => user.status === 'Child');
     dispatch(_getKids(kids));
   };

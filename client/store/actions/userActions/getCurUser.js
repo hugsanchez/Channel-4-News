@@ -20,7 +20,13 @@ const attemptLogin = () => {
             },
           })
         ).data;
-        const userWithFamily = (await axios.get(`/api/users/${user.id}`)).data;
+        const userWithFamily = (
+          await axios.get(`/api/users/${user.id}`, {
+            headers: {
+              authorization: token,
+            },
+          })
+        ).data;
         //TEST HERE IF ADDING PLAID FOR ALREADY LOGGED IN USERS HERE
         dispatch(getCurrentUser(userWithFamily));
       }

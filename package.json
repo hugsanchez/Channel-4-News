@@ -74,6 +74,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.3.4",
+    "socket.io": "^4.5.1",
     "stripe": "^8.153.0",
     "style-loader": "^2.0.0",
     "toad-scheduler": "^1.3.0",
