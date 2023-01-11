@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const WIDTH = 500;
+
 const ChooseFile = ({
   open,
   close,
@@ -33,22 +35,36 @@ const ChooseFile = ({
   imgUrl,
 }) => {
   const [newImgUrl, setNewImg] = useState(imgUrl);
+  const [prevImgUrl, setPrevImg] = useState('');
 
   if (!currUser.id) {
     return null;
   }
 
   const onFileLoad = (file) => {
-    if (file.size > 450000) {
-      alert('FILE TOO BIG!');
-    } else if (file) {
-      let fileReader = new FileReader();
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
 
-      fileReader.addEventListener('load', function () {
-        setNewImg(fileReader.result);
-      });
-      fileReader.readAsDataURL(file);
-    }
+    reader.onload = (event) => {
+      let image_url = event.target.result;
+
+      let imageHolder = document.createElement('img');
+      imageHolder.src = image_url;
+
+      imageHolder.onload = (e) => {
+        let canvas = document.createElement('canvas');
+        let ratio = WIDTH / e.target.width;
+        canvas.width = WIDTH;
+        canvas.height = e.target.height * ratio;
+
+        const context = canvas.getContext('2d');
+        context.drawImage(imageHolder, 0, 0, canvas.width, canvas.height);
+
+        let new_image_url = context.canvas.toDataURL('image/jpeg', 90);
+
+        setNewImg(new_image_url);
+      };
+    };
   };
 
   const hiddenFileInput = React.useRef(null);
